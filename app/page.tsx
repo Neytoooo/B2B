@@ -1,14 +1,13 @@
 import { getAllMetiers, getAllCategories } from "@/lib/metiers";
 import HomeMetiersExplorer from "@/components/HomeMetiersExplorer";
 import {
-  Sparkles,
-  Zap,
   ShieldCheck,
   TrendingUp,
   Clock,
   ArrowRight,
-  CheckCircle,
-  Award,
+  CheckCircle2,
+  Sliders,
+  Scale,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -18,175 +17,165 @@ export default function HomePage() {
   const categories = getAllCategories();
 
   return (
-    <div className="relative overflow-hidden">
-      {/* Background Decorative Gradient Blobs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-[-100px] left-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-indigo-200/50 via-violet-200/40 to-pink-100/30 rounded-full blur-3xl opacity-70" />
-        <div className="absolute top-[-60px] right-1/4 w-[420px] h-[420px] bg-gradient-to-br from-blue-200/40 via-indigo-100/40 to-teal-100/30 rounded-full blur-3xl opacity-60" />
-      </div>
+    <div className="relative">
+      {/* Precision Grid Background in Hero Area */}
+      <div className="absolute top-0 inset-x-0 h-[480px] bg-grid-subtle [mask-image:linear-gradient(to_bottom,white,transparent)] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-16">
         {/* HERO SECTION */}
-        <div className="text-center max-w-3xl mx-auto space-y-6">
-          {/* Top Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-xs sm:text-sm font-semibold shadow-xs">
-            <Sparkles className="w-4 h-4 text-indigo-600" />
-            <span>Comparateur B2B Spécialisé • Édition 2026</span>
+        <div className="text-center max-w-3xl mx-auto space-y-5 animate-fade-in">
+          {/* Top Status Pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+            <span>Comparateur B2B Indépendant • Édition 2026</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
-            Trouvez les meilleurs outils IA pour{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-700">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.12]">
+            Les meilleurs logiciels d&apos;automatisation pour{" "}
+            <span className="text-blue-600 underline decoration-slate-200 underline-offset-8">
               votre métier
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Ne perdez plus 10 heures par semaine sur des tâches administratives répétitives.
-            Découvrez notre sélection indépendante des logiciels d&apos;intelligence artificielle
-            les plus rentables et éprouvés sur le terrain pour votre profession.
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
+            Gagnez jusqu&apos;à 12 heures par semaine sur vos tâches répétitives.
+            Nous auditons, testons et comparons les solutions d&apos;intelligence artificielle réellement adaptées aux réalités des entreprises françaises.
           </p>
 
           {/* Key Stats Bar */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm font-medium text-slate-600">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm font-medium text-slate-600">
             <div className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-emerald-500" />
+              <Clock className="w-4 h-4 text-emerald-600" />
               <span><strong>11h / sem.</strong> économisées en moyenne</span>
             </div>
-            <div className="hidden sm:inline text-slate-300">•</div>
+            <span className="text-slate-300">•</span>
             <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-indigo-500" />
-              <span><strong>100%</strong> indépendant & testé</span>
+              <ShieldCheck className="w-4 h-4 text-slate-700" />
+              <span><strong>100%</strong> indépendant & sans parti pris</span>
             </div>
-            <div className="hidden sm:inline text-slate-300">•</div>
+            <span className="text-slate-300">•</span>
             <div className="flex items-center gap-1.5">
-              <Zap className="w-4 h-4 text-amber-500" />
-              <span><strong>48+</strong> outils audités</span>
+              <Sliders className="w-4 h-4 text-blue-600" />
+              <span><strong>48</strong> logiciels testés</span>
             </div>
           </div>
         </div>
 
-        {/* INTERACTIVE METIERS EXPLORER (Search + Filter + Grid) */}
+        {/* INTERACTIVE METIERS EXPLORER */}
         <HomeMetiersExplorer metiers={metiers} categories={categories} />
 
-        {/* SECTION: POURQUOI NOS COMPARATIFS */}
-        <section id="methodologie" className="my-16 lg:my-24 pt-12 border-t border-slate-200/80">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold uppercase tracking-wider mb-3">
-              <Award className="w-3.5 h-3.5 text-indigo-600" />
-              Exigence & Démarche
+        {/* SECTION: MÉTHODOLOGIE & POURQUOI NOS COMPARATIFS */}
+        <section id="methodologie" className="my-16 lg:my-24 pt-12 border-t border-slate-200">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-semibold uppercase tracking-wider mb-3">
+              <Scale className="w-3.5 h-3.5 text-slate-600" />
+              Protocole d&apos;évaluation
             </div>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              Pourquoi vous fier à nos comparatifs B2B ?
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Une grille d&apos;audit stricte, orientée rentabilité
             </h2>
-            <p className="text-sm text-slate-500 mt-3 leading-relaxed">
-              Le web regorge de listes d&apos;outils IA générées à la chaîne sans aucune vérification.
-              Notre approche est différente : nous mesurons l&apos;impact business réel pour chaque métier.
+            <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+              Nous écartons les gadgets sans valeur ajoutée pour ne sélectionner que les outils produisant un impact direct sur votre marge et votre productivité.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5">
-                <Clock className="w-6 h-6" />
+            <div className="card-hover-effect bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
+                <Clock className="w-5 h-5 text-blue-600" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Gain de Temps Immédiat
+              <h3 className="text-base font-bold text-slate-900 mb-2">
+                Temps Réellement Économisé
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed mb-4">
-                Chaque outil recommandé élimine un goulot d&apos;étranglement précis : rédaction d&apos;annonces,
-                saisie comptable, montage vidéo ou relance de factures.
+                Chaque logiciel est évalué sur un goulot d&apos;étranglement précis : rédaction contractuelle, devis, fiches produits ou relances de factures.
               </p>
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600">
-                <CheckCircle className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700">
+                <CheckCircle2 className="w-4 h-4" />
                 <span>Mesuré chronomètre en main</span>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-5">
-                <TrendingUp className="w-6 h-6" />
+            <div className="card-hover-effect bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
+                <TrendingUp className="w-5 h-5 text-emerald-600" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                ROI Supérieur à 10x
+              <h3 className="text-base font-bold text-slate-900 mb-2">
+                Rentabilité & ROI Vérifié
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed mb-4">
-                Nous écartons systématiquement les gadgets futiles pour ne retenir que les solutions
-                qui se rentabilisent dès le premier contrat ou dès la première semaine d&apos;usage.
+                L&apos;abonnement doit être compensé dès la première semaine par le temps facturable récupéré ou par l&apos;évitement de prestations externes.
               </p>
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600">
-                <CheckCircle className="w-4 h-4" />
-                <span>Rentabilité validée en conditions réelles</span>
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Rentabilité constatée sous 15 jours</span>
               </div>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-xs hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5">
-                <ShieldCheck className="w-6 h-6" />
+            <div className="card-hover-effect bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-2xs">
+              <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center mb-4">
+                <ShieldCheck className="w-5 h-5 text-slate-800" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Sécurité & Conformité RGPD
+              <h3 className="text-base font-bold text-slate-900 mb-2">
+                Conformité & Confidentialité
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed mb-4">
-                Nous vérifions la protection des données professionnelles et l&apos;absence de réutilisation
-                de vos informations confidentielles pour l&apos;entraînement de modèles publics.
+                Nous vérifions les clauses de non-réutilisation des données professionnelles pour l&apos;entraînement public et le respect du RGPD européen.
               </p>
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600">
-                <CheckCircle className="w-4 h-4" />
-                <span>Adapté aux exigences légales françaises</span>
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700">
+                <CheckCircle2 className="w-4 h-4" />
+                <span>Adapté aux exigences juridiques françaises</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* SECTION: 3 ÉTAPES POUR PASSER À L'ACTION */}
-        <section className="my-16 lg:my-20 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-          <div className="absolute right-0 bottom-0 translate-x-12 translate-y-12 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
+        {/* SECTION: GUIDE EN 3 ÉTAPES */}
+        <section className="my-16 lg:my-20 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden">
           <div className="max-w-3xl">
-            <span className="text-indigo-400 text-xs font-bold uppercase tracking-wider">
-              Guide pratique
+            <span className="text-blue-400 text-xs font-bold uppercase tracking-wider">
+              Démarche recommandée
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mt-2 mb-4 tracking-tight">
-              Comment intégrer l&apos;IA dans votre quotidien professionnel sans risque ?
+            <h2 className="text-xl sm:text-2xl font-black mt-2 mb-3 tracking-tight">
+              Comment déployer sans perturber vos équipes ?
             </h2>
-            <p className="text-sm text-slate-300 leading-relaxed mb-8">
-              Pas besoin de révolutionner votre entreprise du jour au lendemain. Adoptez la méthode des petits pas éprouvée par des centaines de cabinets et indépendants.
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-8">
+              Adoptez la méthode progressive utilisée par les cabinets et entreprises qui tirent le meilleur parti des automatisations.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-indigo-600/80 flex items-center justify-center font-bold text-white text-sm">
+              <div className="space-y-1.5">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-white text-xs">
                   1
                 </div>
-                <h4 className="font-bold text-sm text-white">Ciblez une tâche</h4>
+                <h4 className="font-bold text-sm text-white">Identifier la tâche</h4>
                 <p className="text-xs text-slate-400">
-                  Choisissez la tâche répétitive qui vous coûte le plus d&apos;énergie chaque semaine.
+                  Isolez la tâche manuelle la plus chronophage de votre semaine.
                 </p>
               </div>
 
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-indigo-600/80 flex items-center justify-center font-bold text-white text-sm">
+              <div className="space-y-1.5">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-white text-xs">
                   2
                 </div>
-                <h4 className="font-bold text-sm text-white">Testez 7 jours</h4>
+                <h4 className="font-bold text-sm text-white">Tester sur 1 dossier</h4>
                 <p className="text-xs text-slate-400">
-                  Utilisez les essais gratuits de nos outils recommandés sur vos vrais dossiers.
+                  Exploitez les essais gratuits sans carte bancaire sur des cas concrets.
                 </p>
               </div>
 
-              <div className="space-y-2">
-                <div className="w-8 h-8 rounded-lg bg-indigo-600/80 flex items-center justify-center font-bold text-white text-sm">
+              <div className="space-y-1.5">
+                <div className="w-7 h-7 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-white text-xs">
                   3
                 </div>
-                <h4 className="font-bold text-sm text-white">Automatisez</h4>
+                <h4 className="font-bold text-sm text-white">Valider le gain</h4>
                 <p className="text-xs text-slate-400">
-                  Validez le gain de temps et mesurez votre rentabilité immédiate.
+                  Mesurez le temps récupéré avant d&apos;étendre à toute l&apos;équipe.
                 </p>
               </div>
             </div>
@@ -194,14 +183,14 @@ export default function HomePage() {
             <div className="mt-8 pt-6 border-t border-slate-800 flex flex-wrap items-center gap-4">
               <Link
                 href="#metiers"
-                className="px-5 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition-colors flex items-center gap-2 shadow-sm"
+                className="px-4 py-2 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
               >
-                <span>Choisir ma profession</span>
-                <ArrowRight className="w-4 h-4 text-indigo-600" />
+                <span>Accéder aux 12 comparatifs</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-700" />
               </Link>
               <span className="text-xs text-slate-400 flex items-center gap-1.5">
-                <Users className="w-4 h-4 text-emerald-400" />
-                Déjà plus de 25 000 professionnels équipés en 2026
+                <Users className="w-3.5 h-3.5 text-emerald-400" />
+                Des milliers de professionnels consultent nos fiches chaque mois
               </span>
             </div>
           </div>
