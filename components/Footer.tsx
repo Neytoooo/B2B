@@ -1,10 +1,13 @@
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
-import { ShieldCheck, HeartHandshake, ArrowRight } from "lucide-react";
-import { getAllMetiers } from "@/lib/metiers";
+import { ShieldCheck, HeartHandshake, ArrowRight, FolderTree } from "lucide-react";
+import { getAllMetiers, getAllCategoryHubs } from "@/lib/metiers";
 
 export default function Footer() {
   const metiers = getAllMetiers();
+  const hubs = getAllCategoryHubs();
+  // Select top representative métiers for footer display
+  const featuredMetiers = metiers.slice(0, 12);
 
   return (
     <footer className="bg-slate-950 text-slate-300 border-t border-slate-800">
@@ -35,55 +38,92 @@ export default function Footer() {
             </p>
             <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-md border border-emerald-800/50">
               <HeartHandshake className="w-3.5 h-3.5" />
-              <span>Analyses de terrain indépendantes</span>
+              <span>46 professions analysées en 2026</span>
             </div>
           </div>
 
           {/* Col 2 & 3: Metiers list */}
           <div className="md:col-span-2 space-y-3">
-            <h3 className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
-              Guides sectoriels 2026
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-semibold text-slate-200 uppercase tracking-wider">
+                Exemples de comparatifs métiers
+              </h3>
+              <Link
+                href="/plan-du-site"
+                className="text-xs text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1"
+              >
+                <span>Tous les 46 métiers</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              {metiers.map((m) => (
+              {featuredMetiers.map((m) => (
                 <Link
                   key={m.slug}
                   href={`/metier/${m.slug}`}
-                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group py-1"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 group py-1 truncate"
                 >
-                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
-                  <span>{m.metier}</span>
+                  <ArrowRight className="w-3 h-3 text-slate-600 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                  <span className="truncate">{m.metier}</span>
                 </Link>
               ))}
+            </div>
+
+            {/* Category Hubs Chips */}
+            <div className="pt-3 border-t border-slate-800/80">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                Hubs par secteur d&apos;activité :
+              </span>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {hubs.map((h) => (
+                  <Link
+                    key={h.slug}
+                    href={`/categorie/${h.slug}`}
+                    className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
+                  >
+                    {h.nom}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Col 4: Quality Commitment & Links */}
           <div className="space-y-3 text-xs">
             <h3 className="font-semibold text-slate-200 uppercase tracking-wider">
-              Méthodologie & Accès
+              Navigation & Indexation
             </h3>
-            <ul className="space-y-2 text-slate-400">
+            <ul className="space-y-2.5 text-slate-400">
+              <li>
+                <Link
+                  href="/plan-du-site"
+                  className="text-slate-200 hover:text-blue-400 font-semibold flex items-center gap-1.5 transition-colors"
+                >
+                  <FolderTree className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Plan du site (Tous les métiers)</span>
+                </Link>
+              </li>
               <li>
                 <Link href="/#methodologie" className="hover:text-white transition-colors">
-                  Critères d&apos;audit & ROI
+                  Critères d&apos;audit & ROI B2B
                 </Link>
               </li>
               <li>
                 <Link href="/sitemap.xml" className="hover:text-white transition-colors">
-                  Plan du site (sitemap.xml)
+                  Sitemap XML (Index Google)
                 </Link>
               </li>
               <li>
-                <span className="text-slate-500">Mise à jour régulière des tarifs SaaS</span>
+                <span className="text-slate-500">Mises à jour hebdomadaires 2026</span>
               </li>
               <li>
-                <span className="text-slate-500">Protection des données & RGPD</span>
+                <span className="text-slate-500">Conformité RGPD & Données B2B</span>
               </li>
             </ul>
 
             <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-500">
-              Édition 2026 — Plateforme technique statique zéro tracking intrusif.
+              Plateforme 100% statique SSG haute performance pour Googlebot.
             </div>
           </div>
         </div>
@@ -92,9 +132,11 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© 2026 IA Par Métier — Tous droits réservés.</p>
           <p className="flex items-center gap-4">
-            <span>Comparatif B2B Indépendant</span>
+            <Link href="/plan-du-site" className="hover:text-slate-400">
+              Plan du site
+            </Link>
             <span>•</span>
-            <span>France</span>
+            <span>Édition France</span>
           </p>
         </div>
       </div>

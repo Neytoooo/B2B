@@ -28,7 +28,13 @@ export default function Header() {
             className="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5"
           >
             <Layers className="w-3.5 h-3.5 text-slate-400" />
-            12 Métiers Répertoriés
+            46 Métiers Répertoriés
+          </Link>
+          <Link
+            href="/plan-du-site"
+            className="text-xs font-semibold text-slate-600 hover:text-slate-900 transition-colors"
+          >
+            Plan du site
           </Link>
           <Link
             href="/#methodologie"

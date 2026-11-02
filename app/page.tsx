@@ -58,7 +58,7 @@ export default function HomePage() {
             <span className="text-slate-300">•</span>
             <div className="flex items-center gap-1.5">
               <Sliders className="w-4 h-4 text-blue-600" />
-              <span><strong>48</strong> logiciels testés</span>
+              <span><strong>46</strong> métiers & <strong>180+</strong> outils testés</span>
             </div>
           </div>
         </div>
@@ -185,8 +185,14 @@ export default function HomePage() {
                 href="#metiers"
                 className="px-4 py-2 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
               >
-                <span>Accéder aux 12 comparatifs</span>
+                <span>Accéder aux 46 comparatifs</span>
                 <ArrowRight className="w-3.5 h-3.5 text-slate-700" />
+              </Link>
+              <Link
+                href="/plan-du-site"
+                className="px-4 py-2 rounded-xl bg-slate-800 text-white font-bold text-xs hover:bg-slate-700 border border-slate-700 transition-colors flex items-center gap-2"
+              >
+                <span>Voir le plan du site complet</span>
               </Link>
               <span className="text-xs text-slate-400 flex items-center gap-1.5">
                 <Users className="w-3.5 h-3.5 text-emerald-400" />

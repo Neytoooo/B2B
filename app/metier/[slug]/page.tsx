@@ -45,16 +45,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const canonicalUrl = `https://iaparmetier.fr/metier/${slug}`;
+  const canonicalUrl = `https://ia-par-metier.vercel.app/metier/${slug}`;
+  const seoTitle = `Top ${metier.outils.length} Outils IA pour ${metier.metier} en 2026 (Gratuit & Payant)`;
 
   return {
-    title: `${metier.titre_seo}`,
+    title: seoTitle,
     description: metier.meta_description,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: metier.titre_seo,
+      title: seoTitle,
       description: metier.meta_description,
       url: canonicalUrl,
       type: "article",
@@ -62,7 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: metier.titre_seo,
+      title: seoTitle,
       description: metier.meta_description,
     },
   };
@@ -76,8 +77,10 @@ export default async function MetierDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const related = getRelatedMetiers(slug, 3);
+  // 6 related metiers for a strong semantic cocoon
+  const related = getRelatedMetiers(slug, 6);
   const topTool = metier.outils[0];
+  const categorySlug = metier.categorie_slug || "immobilier-btp";
 
   // Structured Data Schema.org
   const breadcrumbSchema = {
@@ -88,19 +91,19 @@ export default async function MetierDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://iaparmetier.fr",
+        item: "https://ia-par-metier.vercel.app",
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Métiers",
-        item: "https://iaparmetier.fr/#metiers",
+        name: metier.categorie_metier,
+        item: `https://ia-par-metier.vercel.app/categorie/${categorySlug}`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: metier.metier,
-        item: `https://iaparmetier.fr/metier/${slug}`,
+        item: `https://ia-par-metier.vercel.app/metier/${slug}`,
       },
     ],
   };
@@ -121,7 +124,7 @@ export default async function MetierDetailPage({ params }: PageProps) {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: metier.titre_seo,
+    name: `Top ${metier.outils.length} Outils IA pour ${metier.metier} en 2026`,
     description: metier.meta_description,
     itemListElement: metier.outils.map((outil, idx) => ({
       "@type": "ListItem",
@@ -155,8 +158,8 @@ export default async function MetierDetailPage({ params }: PageProps) {
             Accueil
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <Link href="/#metiers" className="hover:text-slate-900 transition-colors">
-            Métiers
+          <Link href={`/categorie/${categorySlug}`} className="hover:text-slate-900 transition-colors">
+            {metier.categorie_metier}
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           <span className="font-semibold text-slate-900 truncate">
@@ -167,10 +170,13 @@ export default async function MetierDetailPage({ params }: PageProps) {
         {/* HERO HEADER */}
         <header className="mb-10 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+            <Link
+              href={`/categorie/${categorySlug}`}
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-colors"
+            >
               <Layers className="w-3.5 h-3.5 text-slate-500" />
-              {metier.categorie_metier}
-            </span>
+              <span>Secteur {metier.categorie_metier}</span>
+            </Link>
 
             <div className="inline-flex items-center gap-1.5 text-xs text-slate-500 font-medium">
               <Calendar className="w-3.5 h-3.5 text-slate-400" />
@@ -179,12 +185,12 @@ export default async function MetierDetailPage({ params }: PageProps) {
 
             <div className="inline-flex items-center gap-1 text-xs text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-md font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Audit Indépendant</span>
+              <span>Audit Indépendant 2026</span>
             </div>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-            {metier.titre_seo}
+            Top {metier.outils.length} Outils IA pour {metier.metier} en 2026 (Gratuit & Payant)
           </h1>
 
           {/* Time Saved Highlight Callout Box */}
@@ -208,7 +214,7 @@ export default async function MetierDetailPage({ params }: PageProps) {
 
             <a
               href="#comparatif"
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors shadow-2xs"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors shadow-2xs cursor-pointer"
             >
               <span>Voir le tableau comparatif</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -225,7 +231,7 @@ export default async function MetierDetailPage({ params }: PageProps) {
         <section id="comparatif" className="my-10">
           <div className="mb-4">
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-              Tableau Comparatif : Les Meilleurs Outils pour {metier.metier}
+              Tableau Récapitulatif : Les {metier.outils.length} Meilleurs Outils pour {metier.metier}
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
               Synthèse comparative pour sélectionner rapidement la solution adaptée à votre activité.
@@ -396,7 +402,7 @@ export default async function MetierDetailPage({ params }: PageProps) {
                     {outil.description}
                   </p>
 
-                  {/* CONCRETE REAL LIFE USE CASE CALLOUT (Linear / Executive Memo Style) */}
+                  {/* CONCRETE REAL LIFE USE CASE CALLOUT */}
                   <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border-l-4 border-blue-600 border border-slate-200 mb-6">
                     <div className="flex items-center gap-2 text-slate-900 font-bold text-xs uppercase tracking-wider mb-1.5">
                       <FileText className="w-4 h-4 text-blue-600 shrink-0" />
@@ -476,27 +482,27 @@ export default async function MetierDetailPage({ params }: PageProps) {
         {/* 4. SECTION FAQ SEO */}
         <FaqSection faq={metier.faq} metierNom={metier.metier} />
 
-        {/* 5. MAILLAGE INTERNE AUTOMATIQUE */}
+        {/* 5. MAILLAGE INTERNE AUTOMATIQUE : 6 AUTRES PROFESSIONNELS DU SECTEUR */}
         <section className="my-16 pt-12 border-t border-slate-200">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8">
             <div>
               <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Consulter d&apos;autres professions comparées
+                Autres professionnels du secteur {metier.categorie_metier} qui utilisent l&apos;IA
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                Explorez nos guides indépendants d&apos;automatisation pour d&apos;autres secteurs d&apos;activité.
+                Explorez nos autres comparatifs indépendants taillés pour les professions complémentaires de votre écosystème.
               </p>
             </div>
             <Link
-              href="/#metiers"
-              className="hidden sm:inline-flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-slate-900"
+              href={`/categorie/${categorySlug}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-colors w-fit shrink-0"
             >
-              <span>Voir les 12 métiers</span>
+              <span>Voir tout le secteur</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {related.map((rel) => (
               <Link
                 key={rel.slug}

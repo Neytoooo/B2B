@@ -21,10 +21,17 @@ export interface Metier {
   slug: string;
   metier: string;
   categorie_metier: string;
+  categorie_slug?: string;
   titre_seo: string;
   meta_description: string;
   intro_accroche: string;
   temps_gagne_hebdo: string;
   outils: Outil[];
   faq: FAQItem[];
+}
+
+export interface CategoryHub {
+  slug: string;
+  nom: string;
+  description: string;
 }

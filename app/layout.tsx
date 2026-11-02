@@ -15,7 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://iaparmetier.fr"),
+  metadataBase: new URL("https://ia-par-metier.vercel.app"),
+  alternates: {
+    canonical: "./",
+  },
+  verification: {
+    google: "VOTRE_CODE_GSC_ICI",
+  },
   title: {
     default: "IA Par Métier | Les Meilleurs Outils IA Classés Par Profession (2026)",
     template: "%s | IA Par Métier",
@@ -35,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://iaparmetier.fr",
+    url: "https://ia-par-metier.vercel.app",
     siteName: "IA Par Métier",
     title: "IA Par Métier | Comparateur d'Outils IA par Profession (2026)",
     description:
@@ -54,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth`}>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 antialiased">
+      <body className="min-h-full flex flex-col bg-[#fbfcfd] text-slate-900 antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

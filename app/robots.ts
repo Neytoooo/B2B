@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://iaparmetier.fr/sitemap.xml",
+    sitemap: "https://ia-par-metier.vercel.app/sitemap.xml",
   };
 }
