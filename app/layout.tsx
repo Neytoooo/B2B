@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     canonical: "./",
   },
   verification: {
-    google: "VOTRE_CODE_GSC_ICI",
+    google: "Jd1n0FejsyGFln5lPPlFPd9fO_9qEHym1SLOK_lYnck",
   },
   title: {
     default: "IA Par Métier | Les Meilleurs Outils IA Classés Par Profession (2026)",
